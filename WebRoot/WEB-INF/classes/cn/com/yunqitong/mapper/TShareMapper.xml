@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.yunqitong.mapper.TShareMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.yunqitong.domain.TShare" >
+    <result column="shareid" property="shareid" jdbcType="VARCHAR" />
+    <result column="friendscontent" property="friendscontent" jdbcType="VARCHAR" />
+    <result column="friendspics" property="friendspics" jdbcType="VARCHAR" />
+    <result column="wechatcontent" property="wechatcontent" jdbcType="VARCHAR" />
+    <result column="smscontent" property="smscontent" jdbcType="VARCHAR" />
+    <result column="mailtitle" property="mailtitle" jdbcType="VARCHAR" />
+    <result column="mailbody" property="mailbody" jdbcType="VARCHAR" />
+    <result column="copycontent" property="copycontent" jdbcType="VARCHAR" />
+    <result column="copyhint" property="copyhint" jdbcType="VARCHAR" />
+    <result column="qrcodepic" property="qrcodepic" jdbcType="VARCHAR" />
+    <result column="contactusinfo" property="contactusinfo" jdbcType="VARCHAR" />
+    <result column="contactusnumber" property="contactusnumber" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shareid, friendscontent, friendspics, wechatcontent, smscontent, mailtitle, mailbody, 
+    copycontent, copyhint, qrcodepic, contactusinfo, contactusnumber, createtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.yunqitong.domain.TShareExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.com.yunqitong.domain.TShareExample" >
+    delete from t_share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.yunqitong.domain.TShare" >
+    insert into t_share (shareid, friendscontent, friendspics, 
+      wechatcontent, smscontent, mailtitle, 
+      mailbody, copycontent, copyhint, 
+      qrcodepic, contactusinfo, contactusnumber, 
+      createtime)
+    values (#{shareid,jdbcType=VARCHAR}, #{friendscontent,jdbcType=VARCHAR}, #{friendspics,jdbcType=VARCHAR}, 
+      #{wechatcontent,jdbcType=VARCHAR}, #{smscontent,jdbcType=VARCHAR}, #{mailtitle,jdbcType=VARCHAR}, 
+      #{mailbody,jdbcType=VARCHAR}, #{copycontent,jdbcType=VARCHAR}, #{copyhint,jdbcType=VARCHAR}, 
+      #{qrcodepic,jdbcType=VARCHAR}, #{contactusinfo,jdbcType=VARCHAR}, #{contactusnumber,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.yunqitong.domain.TShare" >
+    insert into t_share
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shareid != null" >
+        shareid,
+      </if>
+      <if test="friendscontent != null" >
+        friendscontent,
+      </if>
+      <if test="friendspics != null" >
+        friendspics,
+      </if>
+      <if test="wechatcontent != null" >
+        wechatcontent,
+      </if>
+      <if test="smscontent != null" >
+        smscontent,
+      </if>
+      <if test="mailtitle != null" >
+        mailtitle,
+      </if>
+      <if test="mailbody != null" >
+        mailbody,
+      </if>
+      <if test="copycontent != null" >
+        copycontent,
+      </if>
+      <if test="copyhint != null" >
+        copyhint,
+      </if>
+      <if test="qrcodepic != null" >
+        qrcodepic,
+      </if>
+      <if test="contactusinfo != null" >
+        contactusinfo,
+      </if>
+      <if test="contactusnumber != null" >
+        contactusnumber,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shareid != null" >
+        #{shareid,jdbcType=VARCHAR},
+      </if>
+      <if test="friendscontent != null" >
+        #{friendscontent,jdbcType=VARCHAR},
+      </if>
+      <if test="friendspics != null" >
+        #{friendspics,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatcontent != null" >
+        #{wechatcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="smscontent != null" >
+        #{smscontent,jdbcType=VARCHAR},
+      </if>
+      <if test="mailtitle != null" >
+        #{mailtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mailbody != null" >
+        #{mailbody,jdbcType=VARCHAR},
+      </if>
+      <if test="copycontent != null" >
+        #{copycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="copyhint != null" >
+        #{copyhint,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcodepic != null" >
+        #{qrcodepic,jdbcType=VARCHAR},
+      </if>
+      <if test="contactusinfo != null" >
+        #{contactusinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactusnumber != null" >
+        #{contactusnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.yunqitong.domain.TShareExample" resultType="java.lang.Integer" >
+    select count(*) from t_share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_share
+    <set >
+      <if test="record.shareid != null" >
+        shareid = #{record.shareid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendscontent != null" >
+        friendscontent = #{record.friendscontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendspics != null" >
+        friendspics = #{record.friendspics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechatcontent != null" >
+        wechatcontent = #{record.wechatcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smscontent != null" >
+        smscontent = #{record.smscontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailtitle != null" >
+        mailtitle = #{record.mailtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailbody != null" >
+        mailbody = #{record.mailbody,jdbcType=VARCHAR},
+      </if>
+      <if test="record.copycontent != null" >
+        copycontent = #{record.copycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.copyhint != null" >
+        copyhint = #{record.copyhint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qrcodepic != null" >
+        qrcodepic = #{record.qrcodepic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactusinfo != null" >
+        contactusinfo = #{record.contactusinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactusnumber != null" >
+        contactusnumber = #{record.contactusnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_share
+    set shareid = #{record.shareid,jdbcType=VARCHAR},
+      friendscontent = #{record.friendscontent,jdbcType=VARCHAR},
+      friendspics = #{record.friendspics,jdbcType=VARCHAR},
+      wechatcontent = #{record.wechatcontent,jdbcType=VARCHAR},
+      smscontent = #{record.smscontent,jdbcType=VARCHAR},
+      mailtitle = #{record.mailtitle,jdbcType=VARCHAR},
+      mailbody = #{record.mailbody,jdbcType=VARCHAR},
+      copycontent = #{record.copycontent,jdbcType=VARCHAR},
+      copyhint = #{record.copyhint,jdbcType=VARCHAR},
+      qrcodepic = #{record.qrcodepic,jdbcType=VARCHAR},
+      contactusinfo = #{record.contactusinfo,jdbcType=VARCHAR},
+      contactusnumber = #{record.contactusnumber,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
